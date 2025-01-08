@@ -1,7 +1,11 @@
 <article>
   <h3>{{ recipe.name }}</h3>
+  <h4>by {{ recipe.credits | checkForAuthor | uppercaseAuthors }}</h4>
   <div>
     <img width="80" height="80" src="{{ recipe.thumbnail_url }}" />
   </div>
   <p>{{ recipe.description | truncate }}</p>
+  <span>Likes: {{ recipe.likes }}</span>
+  <br />
+  <span>Dislikes: {{ recipe.dislikes }}</span>
 </article>
