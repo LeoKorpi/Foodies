@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Recipe } from './interfaces';
+import { Ingredient, Instruction, Recipe } from './interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -25,14 +25,16 @@ export class RecipesService {
 
     if (localData) {
       console.log('Loading recipes from localStorage...');
-      this.localRecipes = JSON.parse(localData);
+      const parsedData = JSON.parse(localData);
+      console.log('Parsed localData: ', parsedData);
+      this.localRecipes = this.recipeMapper(parsedData);
     } else {
       console.log('No localdata found, Fetching data from the API...');
-
       const fetchedRecipes = await this.fetchRecipesFromApi();
       this.apiRecipes = fetchedRecipes;
       localStorage.setItem('recipes', JSON.stringify(fetchedRecipes));
     }
+
     return this.apiRecipes.concat(this.localRecipes);
   }
 
@@ -50,10 +52,75 @@ export class RecipesService {
 
     const response = await fetch(url, options);
     if (!response.ok) throw new Error('Failed to fetch');
-
     const result = await response.json();
     console.timeEnd('fetch done');
-    return result.results;
+    return this.recipeMapper(result.results);
+  }
+
+  private recipeMapper(recipes: any[]): Recipe[] {
+    return recipes.map(
+      ({
+        id,
+        name,
+        thumbnail_url,
+        description,
+        num_servings,
+        sections,
+        instructions,
+        user_ratings,
+        created_at,
+        credits,
+      }) => ({
+        id,
+        name,
+        thumbnail_url,
+        description,
+        num_servings,
+        ingredients: this.mapIngredients(sections?.[0]?.components || []),
+        instructions: this.mapInstructions(instructions),
+        ...this.mapUserRatings(user_ratings),
+        created_at: new Date(created_at * 1000),
+        credits,
+      })
+    );
+  }
+
+  private mapIngredients(components: any[]): Ingredient[] {
+    return (
+      components?.map((component: any) => {
+        const measurement =
+          component.measurements?.length === 2
+            ? component.measurements[1]
+            : component.measurements[0];
+
+        return {
+          id: component.id || 0,
+          name: component.ingredient.name || '',
+          unit: measurement?.unit.abbreviation || '',
+          quantity: measurement?.quantity || '',
+          extra_comment: component.extra_comment || '',
+        };
+      }) || []
+    );
+  }
+
+  private mapInstructions(instructions: any[]): Instruction[] {
+    return (
+      instructions?.map((instruction: any) => ({
+        id: instruction.id || 0,
+        description: instruction.display_text || '',
+      })) || []
+    );
+  }
+
+  private mapUserRatings(userRatings: any): {
+    likes: number;
+    dislikes: number;
+  } {
+    return {
+      likes: userRatings?.count_positive || 0,
+      dislikes: userRatings?.count_negative || 0,
+    };
   }
 
   private loadLocalData(): Recipe[] {
