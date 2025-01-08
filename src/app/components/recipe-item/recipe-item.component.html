@@ -1,3 +1,7 @@
 <article>
-  <h3>{{ recipe.title }}</h3>
+  <h3>{{ recipe.name }}</h3>
+  <div>
+    <img width="80" height="80" src="{{ recipe.thumbnail_url }}" />
+  </div>
+  <p>{{ recipe.description | truncate }}</p>
 </article>

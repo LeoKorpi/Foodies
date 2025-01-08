@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '../../interfaces/recipe';
+import { Recipe } from '../../shared/interfaces';
+import { TruncatePipe } from '../../shared/truncate.pipe';
 
 @Component({
   selector: 'app-recipe-item',
-  imports: [],
+  imports: [TruncatePipe],
   templateUrl: './recipe-item.component.html',
   styleUrl: './recipe-item.component.css',
 })
