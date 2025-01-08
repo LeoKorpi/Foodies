@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../../shared/interfaces';
 import { RecipesService } from '../../shared/recipes.service';
 import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.component';
@@ -10,10 +10,17 @@ import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.co
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {
-  constructor(private recipeService: RecipesService) {}
+export class HomeComponent implements OnInit {
+  recipes: Recipe[];
 
-  get recipes(): Recipe[] {
-    return this.recipeService.recipes;
+  constructor(private recipeService: RecipesService) {
+    this.recipes = [];
+  }
+
+  ngOnInit(): void {
+    this.recipeService.getRecipes().then((data) => {
+      this.recipes = data;
+      console.log('Component Recipes: ', this.recipes);
+    });
   }
 }
