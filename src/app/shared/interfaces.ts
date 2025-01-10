@@ -24,3 +24,8 @@ export interface Ingredient {
   quantity: number;
   extra_comment: string;
 }
+
+export interface Comment {
+  id: number;
+  body: string;
+}
