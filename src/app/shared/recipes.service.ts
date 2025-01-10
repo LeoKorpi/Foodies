@@ -79,7 +79,7 @@ export class RecipesService {
         ingredients: this.mapIngredients(sections?.[0]?.components || []),
         instructions: this.mapInstructions(instructions),
         ...this.mapUserRatings(user_ratings),
-        created_at: new Date(created_at * 1000),
+        created_at: new Date(created_at * 32),
         credits,
       })
     );
