@@ -2,11 +2,18 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CheckForAuthorPipe } from '../../shared/pipes/check-for-author.pipe';
-import { Ingredient, Instruction, Recipe } from '../../shared/interfaces';
+import {
+  Ingredient,
+  Instruction,
+  Recipe,
+  Comment,
+} from '../../shared/interfaces';
 import { JoinAuthorsPipe } from '../../shared/pipes/join-authors.pipe';
 import { RecipesService } from '../../shared/recipes.service';
 import { DateFormatterPipe } from '../../shared/pipes/date-formatter.pipe';
 import { HideZeroQuantityPipe } from '../../shared/pipes/hide-zero-quantity.pipe';
+import { CommentItemComponent } from '../comment-item/comment-item.component';
+import { CommentsService } from '../../shared/comments.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -17,7 +24,9 @@ import { HideZeroQuantityPipe } from '../../shared/pipes/hide-zero-quantity.pipe
     JoinAuthorsPipe,
     DateFormatterPipe,
     HideZeroQuantityPipe,
+    CommentItemComponent,
   ],
+
   templateUrl: './recipe-details.component.html',
   styleUrl: './recipe-details.component.css',
 })
@@ -26,7 +35,8 @@ export class RecipeDetailsComponent {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private recipeService: RecipesService
+    private recipeService: RecipesService,
+    private commentService: CommentsService
   ) {
     activatedRoute.params.subscribe(
       (params) => (this.id = parseInt(params['id']))
@@ -44,6 +54,11 @@ export class RecipeDetailsComponent {
 
   get instructions(): Instruction[] | undefined {
     if (this.recipe) return this.recipe.instructions;
+    return undefined;
+  }
+
+  get comments(): Comment[] | undefined {
+    if (this.recipe) return this.commentService.comments;
     return undefined;
   }
 }
