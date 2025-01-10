@@ -17,7 +17,7 @@ export class RecipesService {
   }
 
   public get recipes(): Recipe[] {
-    return this.apiRecipes.concat(this.localRecipes);
+    return this.recipeMapper(this.apiRecipes.concat(this.localRecipes)); //kör dethär genom recipeMapper med
   }
 
   public async getRecipes(): Promise<Recipe[]> {

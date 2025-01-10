@@ -1,0 +1,37 @@
+<div *ngIf="!recipe">
+  <p>Recipe not found. what could have gone wrong?</p>
+</div>
+
+<main *ngIf="recipe">
+  <a routerLink="">&#8592; Go back</a>
+  <h1>{{ recipe.name }}</h1>
+  <p>by {{ recipe.credits | checkForAuthor | joinAuthors }}</p>
+  <p>published {{ recipe.created_at | dateFormatter }}</p>
+  <div>
+    <button>Like {{ recipe.likes }}</button>
+    <button>Dislike {{ recipe.dislikes }}</button>
+  </div>
+  <div>
+    <img src="{{ recipe.thumbnail_url }}" alt="{{ recipe.name }}" />
+  </div>
+  <p>{{ recipe.description }}</p>
+
+  <br />
+  <p>Ingredients for {{ recipe.num_servings }} servings:</p>
+  <ul>
+    <li *ngFor="let ingredient of ingredients">
+      <p>
+        {{ ingredient.quantity | hideZeroQuantity }}{{ ingredient.unit }}
+        {{ ingredient.name }}
+        {{ ingredient.extra_comment }}
+      </p>
+    </li>
+  </ul>
+  <br />
+  <p>Instructions:</p>
+  <ol>
+    <li *ngFor="let instruction of instructions">
+      <p>{{ instruction.description }}</p>
+    </li>
+  </ol>
+</main>
