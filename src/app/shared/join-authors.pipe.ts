@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'uppercaseAuthors',
+  name: 'joinAuthors',
 })
-export class UppercaseAuthorsPipe implements PipeTransform {
+export class JoinAuthorsPipe implements PipeTransform {
   transform(value: any[]): string {
     if (value.length === 1) return value[0].name;
 
