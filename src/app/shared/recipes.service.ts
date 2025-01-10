@@ -29,7 +29,7 @@ export class RecipesService {
       console.log('Parsed localData: ', parsedData);
       this.localRecipes = this.recipeMapper(parsedData);
     } else {
-      console.log('No localdata found, Fetching data from the API...');
+      console.log('No recipes found, Fetching data from the API...');
       const fetchedRecipes = await this.fetchRecipesFromApi();
       this.apiRecipes = fetchedRecipes;
       localStorage.setItem('recipes', JSON.stringify(fetchedRecipes));
@@ -39,7 +39,7 @@ export class RecipesService {
   }
 
   private async fetchRecipesFromApi(): Promise<Recipe[]> {
-    console.time('fetch done');
+    console.time('recipe fetch done');
     const url =
       'https://tasty.p.rapidapi.com/recipes/list?from=0&size=20&tags=under_30_minutes';
     const options = {
@@ -51,9 +51,9 @@ export class RecipesService {
     };
 
     const response = await fetch(url, options);
-    if (!response.ok) throw new Error('Failed to fetch');
+    if (!response.ok) throw new Error('Failed to fetch recipes');
     const result = await response.json();
-    console.timeEnd('fetch done');
+    console.timeEnd('recipe fetch done');
     return this.recipeMapper(result.results);
   }
 
