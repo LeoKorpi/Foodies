@@ -9,3 +9,10 @@ nav > ul {
   display: flex;
   justify-content: space-between;
 }
+
+.navbar > button {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5rem;
+}
