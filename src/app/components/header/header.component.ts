@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { IconChangeCircleComponent } from '../../shared/icon-change-circle.component';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  imports: [RouterLink, IconChangeCircleComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
