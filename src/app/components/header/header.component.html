@@ -1,14 +1,16 @@
 <h1 routerLink="/">My foodblog</h1>
 <nav>
   <ul>
+    @if (viewState() === 'Admin'){
     <li>
       <a routerLink="">Create a post</a>
     </li>
+    }
     <li>
       <a routerLink="">About me</a>
     </li>
     <li>
-      <button>Admin</button>
+      <button (click)="toggleView()">{{ viewState() }}</button>
     </li>
   </ul>
 </nav>

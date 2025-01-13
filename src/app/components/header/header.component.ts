@@ -7,4 +7,12 @@ import { RouterLink } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  viewState = signal<'Visitor' | 'Admin'>('Visitor');
+
+  toggleView() {
+    this.viewState.update((state) =>
+      state === 'Visitor' ? 'Admin' : 'Visitor'
+    );
+  }
+}
