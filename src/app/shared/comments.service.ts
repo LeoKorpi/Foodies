@@ -28,8 +28,6 @@ export class CommentsService {
       this.startIndex,
       this.endIndex
     );
-    console.log(this.commentMapper(commentsToReturn));
-
     return this.commentMapper(commentsToReturn);
   }
 
