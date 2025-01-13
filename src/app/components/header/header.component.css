@@ -1,5 +1,11 @@
-h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  cursor: pointer;
+nav > ul {
+  list-style-type: none;
+  display: flex;
+  gap: 1.5rem;
+  padding-inline-start: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
 }

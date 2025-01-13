@@ -1,16 +1,19 @@
 <h1 routerLink="/">My foodblog</h1>
-<nav>
-  <ul>
-    @if (viewState() === 'Admin'){
-    <li>
-      <a routerLink="create-post">Create a post</a>
-    </li>
-    }
-    <li>
-      <a routerLink="">About me</a>
-    </li>
-    <li>
-      <button (click)="toggleView()">{{ viewState() }}</button>
-    </li>
-  </ul>
-</nav>
+<div class="navbar">
+  <nav>
+    <ul>
+      <li>
+        <a routerLink="">Recipes</a>
+      </li>
+      <li>
+        <a routerLink="about-me">About me</a>
+      </li>
+      @if (viewState() === 'Admin'){
+      <li>
+        <a routerLink="create-post">Create a post</a>
+      </li>
+      }
+    </ul>
+  </nav>
+  <button (click)="toggleView()">Login: {{ viewState() }}</button>
+</div>
