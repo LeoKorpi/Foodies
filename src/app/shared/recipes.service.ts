@@ -11,31 +11,33 @@ export class RecipesService {
 
   constructor() {
     this.key = process.env.API_KEY;
-    this.localRecipes = this.loadLocalData();
-    if (this.localRecipes.length < 1)
-      this.getRecipes().then((recipes) => (this.apiRecipes = recipes));
+    this.getRecipes().then(([api, local]) => {
+      this.apiRecipes = api;
+      this.localRecipes = local;
+    });
   }
 
   public get recipes(): Recipe[] {
-    return this.recipeMapper(this.apiRecipes.concat(this.localRecipes)); //kör dethär genom recipeMapper med
+    return this.apiRecipes.concat(this.localRecipes);
   }
 
-  public async getRecipes(): Promise<Recipe[]> {
+  public async getRecipes(): Promise<[Recipe[], Recipe[]]> {
     const localData = localStorage.getItem('recipes');
 
     if (localData) {
       console.log('Loading recipes from localStorage...');
-      const parsedData = JSON.parse(localData);
+      const parsedData = JSON.parse(localData).map((recipe: Recipe) => {
+        recipe.created_at = new Date(recipe.created_at);
+        return recipe;
+      });
       console.log('Parsed localData: ', parsedData);
-      this.localRecipes = this.recipeMapper(parsedData);
+      return [[], parsedData];
     } else {
       console.log('No recipes found, Fetching data from the API...');
       const fetchedRecipes = await this.fetchRecipesFromApi();
-      this.apiRecipes = fetchedRecipes;
       localStorage.setItem('recipes', JSON.stringify(fetchedRecipes));
+      return [fetchedRecipes, []];
     }
-
-    return this.apiRecipes.concat(this.localRecipes);
   }
 
   private async fetchRecipesFromApi(): Promise<Recipe[]> {
@@ -79,7 +81,7 @@ export class RecipesService {
         ingredients: this.mapIngredients(sections?.[0]?.components || []),
         instructions: this.mapInstructions(instructions),
         ...this.mapUserRatings(user_ratings),
-        created_at: new Date(created_at * 32),
+        created_at: new Date(created_at * 1000),
         credits,
       })
     );
@@ -121,10 +123,5 @@ export class RecipesService {
       likes: userRatings?.count_positive || 0,
       dislikes: userRatings?.count_negative || 0,
     };
-  }
-
-  private loadLocalData(): Recipe[] {
-    const recipes = localStorage.getItem('recipes');
-    return !recipes ? [] : JSON.parse(recipes);
   }
 }

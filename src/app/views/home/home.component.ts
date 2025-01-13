@@ -18,9 +18,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recipeService.getRecipes().then((data) => {
-      this.recipes = data;
-      console.log('Component Recipes: ', this.recipes);
+    this.recipeService.getRecipes().then(([api, local]) => {
+      this.recipes = api.concat(local);
     });
   }
 }

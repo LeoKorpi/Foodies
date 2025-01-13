@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CheckForAuthorPipe } from '../../shared/pipes/check-for-author.pipe';
 import {
@@ -32,10 +32,6 @@ import { CommentsService } from '../../shared/comments.service';
 })
 export class RecipeDetailsComponent {
   id: number = -1;
-  reactions = signal<{ likes: number; dislikes: number }>({
-    likes: 0,
-    dislikes: 0,
-  });
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,13 +41,10 @@ export class RecipeDetailsComponent {
     activatedRoute.params.subscribe(
       (params) => (this.id = parseInt(params['id']))
     );
-    this.loadReactions();
   }
 
   get recipe(): Recipe | undefined {
-    const recipe = this.recipeService.recipes.find((all) => all.id == this.id);
-    console.log(recipe);
-    return recipe;
+    return this.recipeService.recipes.find((all) => all.id == this.id);
   }
 
   get ingredients(): Ingredient[] | undefined {
@@ -69,35 +62,20 @@ export class RecipeDetailsComponent {
     return undefined;
   }
 
-  loadReactions() {
-    const recipes = JSON.parse(localStorage.getItem('recipes') || '[]');
-    const recipe = recipes.find((r: any) => r.id === this.id);
-
-    if (recipe && recipe.user_ratings) {
-      this.reactions.set({
-        likes: recipe.user_ratings.count_positive || 0,
-        dislikes: recipe.user_ratings.count_negative || 0,
-      });
-    }
-  }
-
-  addReaction(type: 'positive' | 'negative'): void {
-    const recipes = JSON.parse(localStorage.getItem('recipes') || '[]');
-    const recipeIndex = recipes.findIndex((r: any) => r.id === this.id);
-
-    if (recipeIndex !== -1) {
-      const recipe = recipes[recipeIndex];
-      recipe.user_ratings = recipe.user_ratings || {};
-      recipe.user_ratings[`count_${type}`] =
-        (recipe.user_ratings[`count_${type}`] || 0) + 1;
-
-      recipes[recipeIndex] = recipe;
-      localStorage.setItem('recipes', JSON.stringify(recipes));
-
-      this.reactions.set({
-        likes: recipe.user_ratings.count_positive,
-        dislikes: recipe.user_ratings.count_negative,
-      });
+  addReaction(type: 'likes' | 'dislikes'): void {
+    if (this.recipe !== undefined) {
+      this.recipe[type] += 1;
+      localStorage.setItem(
+        'recipes',
+        JSON.stringify(
+          this.recipeService.recipes.map((all) => {
+            if (this.recipe === undefined || all.id !== this.recipe.id) {
+              return all;
+            }
+            return this.recipe;
+          })
+        )
+      );
     }
   }
 }
