@@ -1,8 +1,7 @@
-import { Component, NgZone, signal } from '@angular/core';
+import { Component, NgZone, signal, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { ViewportRuler } from '@angular/cdk/scrolling';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-root',
@@ -10,20 +9,22 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'blog-project';
-
   loginVisible = signal(true);
 
-  constructor(private viewportRuler: ViewportRuler, private ngZone: NgZone) {
+  constructor(private viewportRuler: ViewportRuler, private ngZone: NgZone) {}
+
+  ngOnInit(): void {
+    this.updateLoginVisible();
+
     this.viewportRuler
       .change(100)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() =>
-        this.ngZone.run(() => {
-          var isMobile = this.viewportRuler.getViewportSize().width < 400;
-          this.loginVisible.update(() => !isMobile);
-        })
-      );
+      .subscribe(() => this.ngZone.run(() => this.updateLoginVisible()));
+  }
+
+  private updateLoginVisible(): void {
+    let isSmallDisplay = this.viewportRuler.getViewportSize().width < 400;
+    this.loginVisible.set(!isSmallDisplay);
   }
 }
