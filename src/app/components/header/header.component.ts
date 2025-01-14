@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, Input, Signal, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IconChangeCircleComponent } from '../../shared/icon-change-circle.component';
 
@@ -10,6 +10,8 @@ import { IconChangeCircleComponent } from '../../shared/icon-change-circle.compo
 })
 export class HeaderComponent {
   viewState = signal<'Visitor' | 'Admin'>('Visitor');
+
+  @Input() loginVisible!: Signal<boolean>;
 
   toggleView() {
     this.viewState.update((state) =>
