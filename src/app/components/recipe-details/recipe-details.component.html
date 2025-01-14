@@ -1,8 +1,10 @@
-<div *ngIf="!recipe">
+<!-- error handling -->
+@if(!recipe) {
+<div>
   <p>Recipe not found. what could have gone wrong?</p>
 </div>
-
-<main *ngIf="recipe">
+} @else {
+<main>
   <a routerLink="">&#8592; Go back</a>
   <section>
     <h1>{{ recipe.name }}</h1>
@@ -21,29 +23,35 @@
     <br />
     <p>Ingredients for {{ recipe.num_servings }} servings:</p>
     <ul>
-      <li *ngFor="let ingredient of ingredients">
+      @for(ingredient of ingredients; track ingredient.id; ) {
+      <li>
         <p>
           {{ ingredient.quantity | hideZeroQuantity }}{{ ingredient.unit }}
           {{ ingredient.name }}
           {{ ingredient.extra_comment }}
         </p>
       </li>
+      }
     </ul>
     <br />
     <p>Instructions:</p>
     <ol>
-      <li *ngFor="let instruction of instructions">
+      @for(instruction of instructions; track instruction.id){
+      <li>
         <p>{{ instruction.description }}</p>
       </li>
+      }
     </ol>
   </section>
-
   <section>
     <h2>Comments</h2>
     <ul>
-      <li *ngFor="let comment of comments">
+      @for(comment of comments; track comment.id){
+      <li>
         <app-comment-item [comment]="comment"></app-comment-item>
       </li>
+      }
     </ul>
   </section>
 </main>
+}
