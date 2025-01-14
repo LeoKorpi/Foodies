@@ -10,6 +10,6 @@ export class DateFormatterPipe implements PipeTransform {
       day: 'numeric',
       year: 'numeric',
     };
-    return value.toLocaleDateString('sv-SE', options);
+    return value.toLocaleDateString('en-US', options);
   }
 }
