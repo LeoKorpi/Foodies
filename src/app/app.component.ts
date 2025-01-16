@@ -12,6 +12,7 @@ import { ViewportRuler } from '@angular/cdk/scrolling';
 export class AppComponent implements OnInit {
   title = 'blog-project';
   loginVisible = signal(true);
+  mobileMaxWidth: number = 430;
 
   constructor(private viewportRuler: ViewportRuler, private ngZone: NgZone) {}
 
@@ -24,7 +25,8 @@ export class AppComponent implements OnInit {
   }
 
   private updateLoginVisible(): void {
-    let isSmallDisplay = this.viewportRuler.getViewportSize().width < 400;
+    let isSmallDisplay =
+      this.viewportRuler.getViewportSize().width < this.mobileMaxWidth;
     this.loginVisible.set(!isSmallDisplay);
   }
 }
