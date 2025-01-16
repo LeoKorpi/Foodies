@@ -1,13 +1,8 @@
 <article>
   <h3>{{ recipe.name }}</h3>
-  <p>by {{ recipe.credits | checkForAuthor | joinAuthors }}</p>
   <div>
     <img width="80" height="80" src="{{ recipe.thumbnail_url }}" />
   </div>
-  <p>{{ recipe.description | truncate }}</p>
-  <span>Likes: {{ recipe.likes }}</span>
-  <br />
-  <span>Dislikes: {{ recipe.dislikes }}</span>
   <br />
   <button routerLink="/recipe/{{ recipe.id }}">Read more ></button>
 </article>
