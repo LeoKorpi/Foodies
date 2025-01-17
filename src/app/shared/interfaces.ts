@@ -22,7 +22,7 @@ export interface Ingredient {
   name: string;
   unit: string;
   quantity: number;
-  extra_comment: string;
+  extra_comment?: string;
 }
 
 export interface Comment {
