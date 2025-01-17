@@ -42,9 +42,10 @@ img {
 
 /* Global styling */
 h1 {
-  font-size: 2.5rem;
+  font-size: clamp(2.5rem, 2vw, 3rem);
   font-weight: bold;
   cursor: pointer;
+  margin-bottom: 0.375rem;
 }
 
 h2 {
@@ -63,6 +64,12 @@ p {
 }
 
 body {
-  max-width: 1100px;
+  max-width: 1000px;
+  padding: 0.25rem 0.75rem;
   margin: 0 auto;
+}
+
+button,
+input[type="file"] {
+  cursor: pointer;
 }
