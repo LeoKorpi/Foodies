@@ -1,51 +1,38 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 import { Comment } from './interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommentsService {
-  private apiComments: Comment[] = [];
-  private localComments: Comment[] = [];
-  private noOfCommentsReturned: number = 0;
-  private startIndex: number = 0;
-  private endIndex: number = 0;
+  private commentsSignal = signal<Comment[]>([]);
 
-  constructor() {
-    this.localComments = this.loadLocalData();
-    if (this.localComments.length < 1)
-      this.getComments().then((comments) => (this.apiComments = comments));
-    this.noOfCommentsReturned = Math.ceil(Math.random() * 5) + 2;
-    this.startIndex = Math.floor(Math.random() * this.localComments.length);
-    this.endIndex = Math.min(
-      this.startIndex + this.noOfCommentsReturned,
-      this.localComments.length
-    );
+  readonly randomComments = computed(() => {
+    const allComments = this.commentsSignal();
+    if (allComments.length === 0) return [];
+
+    const count = Math.ceil(Math.random() * 6) + 1; //Random number between 2 and 7
+    const startIndex = Math.ceil(Math.random() * (allComments.length - count));
+    return allComments.slice(startIndex, startIndex + count);
+  });
+
+  constructor() {}
+
+  initialize(): void {
+    const storedComments = this.loadLocalData();
+    if (storedComments.length > 0) this.commentsSignal.set(storedComments);
+    else this.loadComments();
   }
 
-  get comments(): Comment[] {
-    const commentsToReturn = [...this.apiComments, ...this.localComments].slice(
-      this.startIndex,
-      this.endIndex
-    );
-    return this.commentMapper(commentsToReturn);
-  }
-
-  private async getComments(): Promise<Comment[]> {
-    const localData = localStorage.getItem('comments');
-
-    if (localData) {
-      console.log('Loading comments from localStorage...');
-      const parsedData = JSON.parse(localData);
-      console.log('Parsed localData: ', parsedData);
-    } else {
-      console.log('No comments found, Fetching data from the API...');
+  private async loadComments() {
+    try {
       const fetchedComments = await this.loadApiData();
-      this.apiComments = fetchedComments;
+      const mappedComments = this.commentMapper(fetchedComments);
+      this.commentsSignal.set(mappedComments);
       localStorage.setItem('comments', JSON.stringify(fetchedComments));
+    } catch (error) {
+      console.error('Error fetching comments: ', error);
     }
-
-    return [...this.apiComments, ...this.localComments];
   }
 
   private async loadApiData(): Promise<Comment[]> {
@@ -58,7 +45,7 @@ export class CommentsService {
   }
 
   private commentMapper(comments: any[]): Comment[] {
-    return comments.map(({ body, id }) => ({
+    return comments.map(({ id, body }) => ({
       id,
       body,
     }));
@@ -66,6 +53,6 @@ export class CommentsService {
 
   private loadLocalData(): Comment[] {
     const comments = localStorage.getItem('comments');
-    return !comments ? [] : JSON.parse(comments);
+    return comments ? JSON.parse(comments) : [];
   }
 }

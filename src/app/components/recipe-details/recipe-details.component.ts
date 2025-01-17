@@ -1,6 +1,6 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, RouterLink } from '@angular/router';
 import { CommentsService } from '../../shared/comments.service';
 import {
   Comment,
@@ -14,7 +14,6 @@ import { HideZeroQuantityPipe } from '../../shared/pipes/hide-zero-quantity.pipe
 import { JoinAuthorsPipe } from '../../shared/pipes/join-authors.pipe';
 import { RecipesService } from '../../shared/recipes.service';
 import { CommentItemComponent } from '../comment-item/comment-item.component';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-details',
@@ -30,7 +29,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './recipe-details.component.html',
   styleUrl: './recipe-details.component.css',
 })
-export class RecipeDetailsComponent {
+export class RecipeDetailsComponent implements OnInit {
   id = computed(() => {
     const paramMap = this.paramMap();
     return paramMap ? parseInt(paramMap.get('id') || '0', 10) : null;
@@ -48,6 +47,10 @@ export class RecipeDetailsComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.commentService.initialize();
+  }
+
   get recipe(): Recipe | undefined {
     return this.recipeService.recipes.find((all) => all.id == this.id());
   }
@@ -60,8 +63,8 @@ export class RecipeDetailsComponent {
     return this.recipe?.instructions;
   }
 
-  get comments(): Comment[] | undefined {
-    return this.recipe ? this.commentService.comments : undefined;
+  get comments(): Comment[] {
+    return this.commentService.randomComments();
   }
 
   // flytta till recipe.service för att hålla all data-logik där
