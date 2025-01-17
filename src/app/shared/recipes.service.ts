@@ -40,6 +40,11 @@ export class RecipesService {
     }
   }
 
+  public addRecipe(recipe: Recipe): void {
+    this.localRecipes.unshift(recipe);
+    localStorage.setItem('recipes', JSON.stringify(this.localRecipes));
+  }
+
   private async fetchRecipesFromApi(): Promise<Recipe[]> {
     console.time('recipe fetch done');
     const url =
