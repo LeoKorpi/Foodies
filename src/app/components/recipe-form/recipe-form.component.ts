@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { RecipesService } from '../../shared/services/recipes.service';
 import { CreatePostService } from '../../shared/services/create-post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-form',
@@ -21,7 +22,8 @@ export class RecipeFormComponent {
 
   constructor(
     public createPostService: CreatePostService,
-    private recipeService: RecipesService
+    private recipeService: RecipesService,
+    private router: Router
   ) {}
 
   onFileSelected(event: Event): void {
@@ -52,5 +54,6 @@ export class RecipeFormComponent {
       credits: [{ name: 'Admin' }],
     };
     this.recipeService.addRecipe(newRecipe);
+    this.router.navigateByUrl('/');
   }
 }
