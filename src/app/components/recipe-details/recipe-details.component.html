@@ -26,7 +26,7 @@
       @for(ingredient of ingredients; track ingredient.id; ) {
       <li>
         <p>
-          {{ ingredient.quantity | hideZeroQuantity }}{{ ingredient.unit }}
+          {{ ingredient.quantity | hideZeroQuantity }} {{ ingredient.unit }}
           {{ ingredient.name }}
           {{ ingredient.extra_comment }}
         </p>
