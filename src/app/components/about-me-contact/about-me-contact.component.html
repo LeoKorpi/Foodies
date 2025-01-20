@@ -1,1 +1,50 @@
-<p>about-me-contact works!</p>
+<section>
+  <h2>Reach out to me!</h2>
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="label-and-input">
+      <label for="sender">Sender</label>
+      <input
+        id="sender"
+        type="text"
+        placeholder="Name Nameson"
+        formControlName="sender"
+        required
+      />
+    </div>
+    <div class="label-and-input">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="name@email.com"
+        autocomplete="email"
+        required
+      />
+    </div>
+    <div class="label-and-input">
+      <label for="subject">Subject</label>
+      <input
+        id="subject"
+        type="text"
+        formControlName="subject"
+        placeholder="What is the message about?"
+        required
+      />
+    </div>
+    <div class="label-and-input">
+      <label for="content">Subject</label>
+      <textarea
+        id="content"
+        rows="8"
+        placeholder="What are your reasons for contacting me?"
+        formControlName="content"
+        required
+      ></textarea>
+    </div>
+    <button type="submit" [disabled]="!contactForm.valid">Send message</button>
+  </form>
+  @if(messageSent){
+  <p>Message sent!</p>
+  }
+</section>
