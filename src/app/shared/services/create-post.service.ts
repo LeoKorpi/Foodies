@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { signal } from '@angular/core';
-import { Ingredient, Instruction } from './interfaces';
+import { Ingredient, Instruction } from '../models';
 
 @Injectable({
   providedIn: 'root',

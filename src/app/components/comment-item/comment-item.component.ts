@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
-import { Comment } from '../../shared/interfaces';
+import { Comment } from '../../shared/models';
 
 @Component({
   selector: 'app-comment-item',

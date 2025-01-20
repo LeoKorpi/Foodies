@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { CreatePostService } from '../../shared/create-post.service';
+import { CreatePostService } from '../../shared/services/create-post.service';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
-import { Ingredient, Instruction } from '../../shared/interfaces';
-import { RecipesService } from '../../shared/recipes.service';
+import { Ingredient, Instruction } from '../../shared/models';
+import { RecipesService } from '../../shared/services/recipes.service';
 
 @Component({
   selector: 'app-create-post',

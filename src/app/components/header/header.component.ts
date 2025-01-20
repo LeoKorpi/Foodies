@@ -1,6 +1,6 @@
 import { Component, Input, Signal, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IconChangeCircleComponent } from '../../shared/icon-change-circle.component';
+import { IconChangeCircleComponent } from '../icons/icon-change-circle.component';
 
 @Component({
   selector: 'app-header',

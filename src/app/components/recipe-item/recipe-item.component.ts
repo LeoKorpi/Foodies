@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '../../shared/interfaces';
+import { Recipe } from '../../shared/models';
 import { RouterLink } from '@angular/router';
 
 @Component({

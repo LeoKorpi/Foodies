@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../../shared/interfaces';
-import { RecipesService } from '../../shared/recipes.service';
+import { Recipe } from '../../shared/models';
+import { RecipesService } from '../../shared/services/recipes.service';
 import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.component';
 
 @Component({
