@@ -9,7 +9,7 @@ export class CreatePostService {
   title = signal('');
   description = signal('');
   noOfServings = signal(0);
-  imagePreview = signal<string | null>(null);
+  imagePreview = signal<string>('');
   ingredientInput = signal('');
   ingredients = signal<Ingredient[]>([]);
   instructionInput = signal('');
@@ -108,7 +108,7 @@ export class CreatePostService {
 
     if (!match) return null;
 
-    const [id, quantity, unit, name, comment] = match;
+    const [, quantity, unit, name, comment] = match;
     return {
       id: Math.ceil(Math.random() * 100),
       name: name.trim(),
