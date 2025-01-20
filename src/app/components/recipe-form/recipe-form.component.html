@@ -1,0 +1,90 @@
+<section>
+  <h2>Tell us about your recipe!</h2>
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <div class="label-and-input">
+      <label for="title">Title</label>
+      <input
+        id="title"
+        type="text"
+        placeholder="What is it called?"
+        formControlName="title"
+        (input)="createPostService.updateTitle($event)"
+        required
+      />
+    </div>
+    <div class="label-and-input">
+      <label for="picture">Picture</label>
+      <input
+        id="picture"
+        type="file"
+        formControlName="imageUrl"
+        (change)="onFileSelected($event)"
+      />
+    </div>
+    <div class="label-and-input">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        rows="5"
+        placeholder="Breifly describe your recipe! Something short that captures the reader and makes them want to try it"
+        formControlName="description"
+        (input)="createPostService.updateDescription($event)"
+        required
+      ></textarea>
+    </div>
+    <div class="label-and-input">
+      <label for="noOfServings">Number of servings</label>
+      <input
+        id="noOfServings"
+        type="number"
+        min="1"
+        formControlName="noOfServings"
+        (input)="createPostService.updateNoOfServings($event)"
+      />
+    </div>
+    <h3>Ingredients</h3>
+    <div class="label-and-input">
+      <label for="ingredients">Ingredients (one per line) </label>
+      <em>
+        Write the amount, the unit and lastly the name of the ingredient.
+        Optionally, you can also add an comment by writing '-' followed by the
+        comment
+      </em>
+      <textarea
+        id="ingredients"
+        rows="8"
+        placeholder="e.g. 2 tsp baking powder - add to make your pancakes more fluffy"
+        formControlName="ingredients"
+        [value]="createPostService.ingredientInput()"
+        (input)="createPostService.updateIngredientInput($event)"
+      ></textarea>
+    </div>
+    <button
+      type="button"
+      class="add-btn"
+      (click)="createPostService.addIngredients()"
+    >
+      Add ingredients
+    </button>
+    <h3>Instructions</h3>
+    <div class="label-and-input">
+      <label for="instructions">Same as ingredients, one per line</label>
+      <textarea
+        id="instructions"
+        rows="8"
+        placeholder="e.g. preheat the oven to 200°C"
+        formControlName="instructions"
+        [value]="createPostService.instructionInput()"
+        (input)="createPostService.updateInstructionInput($event)"
+      ></textarea>
+    </div>
+    <button
+      type="button"
+      class="add-btn"
+      (click)="createPostService.addInstructions()"
+    >
+      Add instructions
+    </button>
+    <button type="submit" [disabled]="!postForm.valid">Publish post</button>
+  </form>
+</section>

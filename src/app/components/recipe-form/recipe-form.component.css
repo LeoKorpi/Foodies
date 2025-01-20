@@ -1,0 +1,19 @@
+section {
+  width: 100%;
+  max-width: 600px;
+}
+
+ul,
+ol {
+  padding-inline-start: 1rem;
+}
+
+.add-btn {
+  margin-bottom: 1rem;
+}
+
+.label-and-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+}
