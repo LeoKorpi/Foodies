@@ -1,3 +1,50 @@
-main {
-  padding: 1rem 1.5rem;
+.content-section,
+.image-container,
+.description,
+.ingredients,
+.instructions,
+.comment-section {
+  margin-bottom: 1.5rem;
+}
+
+.instructions {
+  max-width: 800px;
+}
+
+.instructions > li {
+  margin-bottom: 0.75em;
+}
+
+.reaction-buttons {
+  display: flex;
+  justify-content: space-between;
+  place-self: center;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.reaction-buttons > button {
+  width: 130px;
+  transition: transform ease-in-out 200ms;
+}
+
+.reaction-buttons > button:active {
+  transform: scale(1.25);
+}
+
+#dislike {
+  background-color: #2d130b;
+}
+
+.comment-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-section > textarea {
+  margin-bottom: 0.5rem;
+}
+
+.comment-section > button {
+  margin-bottom: 1rem;
 }

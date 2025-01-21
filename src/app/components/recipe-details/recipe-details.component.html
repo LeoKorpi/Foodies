@@ -6,25 +6,17 @@
 } @else {
 <main>
   <a routerLink="">&#8592; Go back</a>
-  <section>
-    <h1>{{ recipe.name }}</h1>
+  <section class="content-section">
+    <h2>{{ recipe.name }}</h2>
     <p>by {{ recipe.credits | checkForAuthor | joinAuthors }}</p>
-    <p>published {{ recipe.created_at | dateFormatter }}</p>
-    <div>
-      <button (click)="recipeService.addReaction(recipe.id, 'likes')">
-        Like {{ recipe.likes }}
-      </button>
-      <button (click)="recipeService.addReaction(recipe.id, 'dislikes')">
-        Dislike {{ recipe.dislikes }}
-      </button>
-    </div>
-    <div>
+    <p>Published {{ recipe.created_at | dateFormatter }}</p>
+
+    <div class="image-container">
       <img src="{{ recipe.thumbnail_url }}" alt="{{ recipe.name }}" />
     </div>
-    <p>{{ recipe.description }}</p>
-    <br />
-    <p>Ingredients for {{ recipe.num_servings }} servings:</p>
-    <ul>
+    <p class="description">{{ recipe.description }}</p>
+    <h3>Ingredients for {{ recipe.num_servings }} servings:</h3>
+    <ul class="ingredients">
       @for(ingredient of ingredients; track ingredient.id; ) {
       <li>
         <p>
@@ -35,18 +27,32 @@
       </li>
       }
     </ul>
-    <br />
-    <p>Instructions:</p>
-    <ol>
+    <h3>Instructions:</h3>
+    <ol class="instructions">
       @for(instruction of instructions; track instruction.id){
       <li>
         <p>{{ instruction.description }}</p>
       </li>
       }
     </ol>
+    <div class="reaction-buttons">
+      <button
+        class="btn"
+        (click)="recipeService.addReaction(recipe.id, 'likes')"
+      >
+        Delicious! {{ recipe.likes }}
+      </button>
+      <button
+        class="btn"
+        id="dislike"
+        (click)="recipeService.addReaction(recipe.id, 'dislikes')"
+      >
+        Burnt... {{ recipe.dislikes }}
+      </button>
+    </div>
   </section>
-  <section>
-    <h2>Comments</h2>
+  <section class="comment-section">
+    <h3>Comments</h3>
     <label for="newComment">Add a comment </label>
     <textarea
       name="newComment"
@@ -56,6 +62,7 @@
       rows="5"
     ></textarea>
     <button
+      class="btn"
       (click)="
         commentService.addComment(newComment.value); newComment.value = ''
       "

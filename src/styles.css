@@ -41,6 +41,10 @@ img {
   max-inline-size: 100%;
 }
 
+textarea {
+  resize: none;
+}
+
 /* Global styling */
 h1 {
   font-size: clamp(3rem, 2vw, 2rem);
@@ -74,4 +78,13 @@ body {
 button,
 input[type="file"] {
   cursor: pointer;
+}
+
+.btn {
+  border: none;
+  border-radius: 0.25em;
+  font-size: 110%;
+  padding: 0.5em 0.75em;
+  background-color: #338208;
+  color: white;
 }
