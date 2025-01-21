@@ -16,6 +16,7 @@ import { Component } from '@angular/core';
       />
     </svg>
   `,
+  // had to add a weird number to [attr.height] because line-height css also affects icons
 })
 export class IconChangeCircleComponent {
   size: string = '24';
