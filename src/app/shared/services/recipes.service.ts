@@ -45,6 +45,16 @@ export class RecipesService {
     localStorage.setItem('recipes', JSON.stringify(this.localRecipes));
   }
 
+  public addReaction(id: number, type: 'likes' | 'dislikes'): void {
+    const recipe = this.recipes.find((all) => all.id == id);
+    if (!recipe) return;
+    recipe[type]++;
+    localStorage.setItem(
+      'recipes',
+      JSON.stringify(this.recipes.map((all) => (all.id === id ? recipe : all)))
+    );
+  }
+
   private async fetchRecipesFromApi(): Promise<Recipe[]> {
     console.time('recipe fetch done');
     const url =

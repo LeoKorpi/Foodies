@@ -11,8 +11,10 @@
     <p>by {{ recipe.credits | checkForAuthor | joinAuthors }}</p>
     <p>published {{ recipe.created_at | dateFormatter }}</p>
     <div>
-      <button (click)="addReaction('likes')">Like {{ recipe.likes }}</button>
-      <button (click)="addReaction('dislikes')">
+      <button (click)="recipeService.addReaction(recipe.id, 'likes')">
+        Like {{ recipe.likes }}
+      </button>
+      <button (click)="recipeService.addReaction(recipe.id, 'dislikes')">
         Dislike {{ recipe.dislikes }}
       </button>
     </div>

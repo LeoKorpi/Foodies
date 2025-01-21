@@ -34,7 +34,7 @@ export class RecipeDetailsComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private recipeService: RecipesService,
+    public recipeService: RecipesService,
     public commentService: CommentsService
   ) {
     this.paramMap = toSignal(this.activatedRoute.paramMap, {
@@ -60,20 +60,5 @@ export class RecipeDetailsComponent implements OnInit {
 
   get comments(): Comment[] {
     return this.commentService.randomComments();
-  }
-
-  // flytta till recipe.service för att hålla all data-logik där
-  addReaction(type: 'likes' | 'dislikes'): void {
-    if (this.recipe) {
-      this.recipe[type]++;
-      localStorage.setItem(
-        'recipes',
-        JSON.stringify(
-          this.recipeService.recipes.map((all) =>
-            this.recipe && all.id === this.recipe.id ? this.recipe : all
-          )
-        )
-      );
-    }
   }
 }
