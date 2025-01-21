@@ -43,9 +43,24 @@
       }
     </ol>
   </section>
-  @if(comments.length > 0){
   <section>
     <h2>Comments</h2>
+    <label for="newComment">Add a comment </label>
+    <textarea
+      name="newComment"
+      id="newComment"
+      #newComment
+      placeholder="I think i'll try this tonight!"
+      rows="5"
+    ></textarea>
+    <button
+      (click)="
+        commentService.addComment(newComment.value); newComment.value = ''
+      "
+    >
+      Send
+    </button>
+    @if(comments.length > 0){
     <ul>
       @for(comment of comments; track comment.id){
       <li>
@@ -53,7 +68,7 @@
       </li>
       }
     </ul>
+    }
   </section>
-  }
 </main>
 }

@@ -24,7 +24,16 @@ export class CommentsService {
     else this.loadComments();
   }
 
-  private async loadComments() {
+  public addComment(body: string): void {
+    const randomId = Math.ceil(Math.random() * 1000);
+    const newComment: Comment = {
+      id: randomId,
+      body: body,
+    };
+    this.randomComments().push(newComment);
+  }
+
+  private async loadComments(): Promise<void> {
     try {
       const fetchedComments = await this.loadApiData();
       const mappedComments = this.commentMapper(fetchedComments);

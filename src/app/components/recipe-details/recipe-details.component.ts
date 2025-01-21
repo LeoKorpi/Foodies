@@ -35,7 +35,7 @@ export class RecipeDetailsComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private recipeService: RecipesService,
-    private commentService: CommentsService
+    public commentService: CommentsService
   ) {
     this.paramMap = toSignal(this.activatedRoute.paramMap, {
       initialValue: null,
