@@ -1,7 +1,14 @@
-ul {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  list-style-type: none;
-  padding-inline: 0;
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  margin-bottom: 2rem;
+}
+
+/* Large devices (laptops, desktops and up) */
+@media screen and (min-width: 992px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }

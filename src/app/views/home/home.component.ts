@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../../shared/models';
 import { RecipesService } from '../../shared/services/recipes.service';
@@ -6,7 +5,7 @@ import { RecipeItemComponent } from '../../components/recipe-item/recipe-item.co
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RecipeItemComponent],
+  imports: [RecipeItemComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

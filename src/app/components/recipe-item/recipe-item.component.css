@@ -1,7 +1,66 @@
 article {
-  margin: 0.75rem;
-  padding: 1rem;
-  border: 2px solid black;
-  max-width: 475px;
-  width: 300px;
+  height: 10rem;
+  background-color: white;
+  border-radius: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  border-radius: 1rem;
+  transition: opacity ease-in-out var(--fade-in-time);
+}
+
+.recipe-heading {
+  position: relative;
+  right: 0;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 9999;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
+/* headingen blir synlig för att element har ett parent-child förhållande till varandra */
+article:hover .recipe-heading {
+  visibility: visible;
+  animation: slide-up var(--fade-in-time) ease-in forwards;
+}
+
+article:not(:hover) .recipe-heading {
+  animation: slide-down var(--fade-in-time) ease-out forwards;
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    bottom: 50%;
+  }
+  100% {
+    opacity: 1;
+    bottom: 65%;
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    opacity: 1;
+    bottom: 65%;
+  }
+  100% {
+    opacity: 0;
+    bottom: 50%;
+  }
+}
+
+article:hover .background-image {
+  opacity: 50%;
 }

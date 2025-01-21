@@ -1,6 +1,10 @@
-<h2>All recipes</h2>
-<ul>
-  <li *ngFor="let recipe of recipes">
-    <app-recipe-item [recipe]="recipe" />
-  </li>
-</ul>
+<main>
+  <h2>All Recipes</h2>
+  <div class="grid">
+    @for(recipe of recipes; track recipe.id){
+    <app-recipe-item class="grid-item" [recipe]="recipe" />
+    } @empty {
+    <p>No recipes yet...</p>
+    }
+  </div>
+</main>

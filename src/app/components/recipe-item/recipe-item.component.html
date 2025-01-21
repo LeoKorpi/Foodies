@@ -1,8 +1,9 @@
-<article>
-  <h3>{{ recipe.name }}</h3>
-  <div>
-    <img width="80" height="80" src="{{ recipe.thumbnail_url }}" />
-  </div>
-  <br />
-  <button routerLink="/recipe/{{ recipe.id }}">Read more ></button>
-</article>
+<a routerLink="/recipe/{{ recipe.id }}" title="{{ recipe.name }}">
+  <article>
+    <div
+      [style.backgroundImage]="'url(' + recipe.thumbnail_url + ')'"
+      class="background-image"
+    ></div>
+    <h3 class="recipe-heading">{{ recipe.name }}</h3>
+  </article>
+</a>
