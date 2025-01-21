@@ -1,0 +1,35 @@
+.image-container {
+  max-width: 200px;
+  border: 2px solid darkgray;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+p {
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+/* Medium devices (smaller tablets, micro-computers and up) */
+@media screen and (min-width: 500px) {
+  .profile-container {
+    margin: 1rem 0;
+    width: 100%;
+    max-width: 850px;
+  }
+  .image-container {
+    float: left;
+    margin: 1rem 2rem 0 1rem;
+    border: 2px solid darkgray;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    width: auto;
+    height: auto;
+  }
+}

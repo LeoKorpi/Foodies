@@ -42,7 +42,9 @@
         required
       ></textarea>
     </div>
-    <button type="submit" [disabled]="!contactForm.valid">Send message</button>
+    <button class="btn" type="submit" [disabled]="!contactForm.valid">
+      Send message
+    </button>
   </form>
   @if(messageSent){
   <p>Message sent!</p>

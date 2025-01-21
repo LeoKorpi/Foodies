@@ -1,8 +1,18 @@
-button:disabled,
-button[disabled] {
-  cursor: not-allowed;
+.label-and-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
 }
 
-button {
-  cursor: pointer;
+.btn:disabled {
+  opacity: 0.6;
+}
+
+input,
+textarea {
+  padding-inline: 0.25rem;
+}
+
+section {
+  max-width: 550px;
 }

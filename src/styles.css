@@ -80,6 +80,11 @@ input[type="file"] {
   cursor: pointer;
 }
 
+button:disabled,
+button[disabled] {
+  cursor: not-allowed;
+}
+
 .btn {
   border: none;
   border-radius: 0.25em;
