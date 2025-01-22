@@ -4,10 +4,6 @@
   margin-bottom: 0.75rem;
 }
 
-.btn:disabled {
-  opacity: 0.6;
-}
-
 input,
 textarea {
   padding-inline: 0.25rem;
