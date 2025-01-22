@@ -4,6 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'joinAuthors',
 })
 export class JoinAuthorsPipe implements PipeTransform {
+  // If a recipe has more than one author we return a string with 'and' inbetween
   transform(value: any[]): string {
     if (value.length === 1) return value[0].name;
 
