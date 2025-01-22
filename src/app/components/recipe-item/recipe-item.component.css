@@ -2,6 +2,8 @@ article {
   height: 10rem;
   background-color: white;
   border-radius: 1rem;
+  outline: 0 solid white;
+  transition: outline-width ease-in-out var(--fade-in-time);
 }
 
 a {
@@ -30,9 +32,15 @@ a {
 }
 
 /* headingen blir synlig för att element har ett parent-child förhållande till varandra */
-article:hover .recipe-heading {
-  visibility: visible;
-  animation: slide-up var(--fade-in-time) ease-in forwards;
+article:hover {
+  & .recipe-heading {
+    visibility: visible;
+    animation: slide-up var(--fade-in-time) ease-in forwards;
+  }
+  & .background-image {
+    opacity: 50%;
+  }
+  outline-width: 0.5rem;
 }
 
 article:not(:hover) .recipe-heading {
@@ -59,8 +67,4 @@ article:not(:hover) .recipe-heading {
     opacity: 0;
     bottom: 50%;
   }
-}
-
-article:hover .background-image {
-  opacity: 50%;
 }
