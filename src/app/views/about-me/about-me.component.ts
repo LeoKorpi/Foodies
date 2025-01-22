@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AboutMeInfoComponent } from '../../components/about-me-info/about-me-info.component';
 import { AboutMeContactComponent } from '../../components/about-me-contact/about-me-contact.component';
+import { AboutMeInfoComponent } from '../../components/about-me-info/about-me-info.component';
 
 @Component({
   selector: 'app-about-me',

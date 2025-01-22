@@ -1,4 +1,4 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { Comment } from '../models';
 
 @Injectable({
@@ -7,6 +7,7 @@ import { Comment } from '../models';
 export class CommentsService {
   private commentsSignal = signal<Comment[]>([]);
 
+  // returns 2-7 random comments from the 50 that the commentSignal contains
   readonly randomComments = computed(() => {
     const allComments = this.commentsSignal();
     if (allComments.length === 0) return [];
@@ -16,15 +17,13 @@ export class CommentsService {
     return allComments.slice(startIndex, startIndex + count);
   });
 
-  constructor() {}
-
   initialize(): void {
     const storedComments = this.loadLocalData();
     if (storedComments.length > 0) this.commentsSignal.set(storedComments);
     else this.loadComments();
   }
 
-  public addComment(body: string): void {
+  addComment(body: string): void {
     const randomId = Math.ceil(Math.random() * 1000);
     const newComment: Comment = {
       id: randomId,

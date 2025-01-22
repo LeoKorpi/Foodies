@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Ingredient, Instruction } from '../models';
 
 @Injectable({

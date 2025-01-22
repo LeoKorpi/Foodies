@@ -17,11 +17,11 @@ export class RecipesService {
     });
   }
 
-  public get recipes(): Recipe[] {
+  get recipes(): Recipe[] {
     return this.apiRecipes.concat(this.localRecipes);
   }
 
-  public async getRecipes(): Promise<[Recipe[], Recipe[]]> {
+  async getRecipes(): Promise<[Recipe[], Recipe[]]> {
     const localData = localStorage.getItem('recipes');
 
     if (localData) {
@@ -30,7 +30,6 @@ export class RecipesService {
         recipe.created_at = new Date(recipe.created_at);
         return recipe;
       });
-      console.log('Parsed localData: ', parsedData);
       return [[], parsedData];
     } else {
       console.log('No recipes found, Fetching data from the API...');
@@ -40,12 +39,12 @@ export class RecipesService {
     }
   }
 
-  public addRecipe(recipe: Recipe): void {
+  addRecipe(recipe: Recipe): void {
     this.localRecipes.unshift(recipe);
     localStorage.setItem('recipes', JSON.stringify(this.localRecipes));
   }
 
-  public addReaction(id: number, type: 'likes' | 'dislikes'): void {
+  addReaction(id: number, type: 'likes' | 'dislikes'): void {
     const recipe = this.recipes.find((all) => all.id == id);
     if (!recipe) return;
     recipe[type]++;

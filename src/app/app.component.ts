@@ -1,7 +1,7 @@
-import { Component, NgZone, signal, OnInit } from '@angular/core';
+import { ViewportRuler } from '@angular/cdk/scrolling';
+import { Component, NgZone, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
-import { ViewportRuler } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-root',

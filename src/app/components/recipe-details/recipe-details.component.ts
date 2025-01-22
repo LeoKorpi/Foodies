@@ -1,19 +1,18 @@
 import { Component, computed, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, ParamMap, RouterLink } from '@angular/router';
-import { CommentsService } from '../../shared/services/comments.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Comment, Ingredient, Instruction, Recipe } from '../../shared/models';
 import { CheckForAuthorPipe } from '../../shared/pipes/check-for-author.pipe';
 import { DateFormatterPipe } from '../../shared/pipes/date-formatter.pipe';
 import { HideZeroQuantityPipe } from '../../shared/pipes/hide-zero-quantity.pipe';
 import { JoinAuthorsPipe } from '../../shared/pipes/join-authors.pipe';
+import { CommentsService } from '../../shared/services/comments.service';
 import { RecipesService } from '../../shared/services/recipes.service';
 import { CommentItemComponent } from '../comment-item/comment-item.component';
 
 @Component({
   selector: 'app-recipe-details',
   imports: [
-    RouterLink,
     CheckForAuthorPipe,
     JoinAuthorsPipe,
     DateFormatterPipe,
