@@ -17,8 +17,6 @@ p {
 @media screen and (min-width: 500px) {
   .profile-container {
     margin: 1rem 0;
-    width: 100%;
-    max-width: 850px;
   }
   .image-container {
     float: left;

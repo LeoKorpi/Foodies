@@ -1,3 +1,12 @@
+ol,
+ul {
+  padding-inline: 0;
+}
+
+li {
+  margin-left: 1rem;
+}
+
 .image-container {
   max-width: 450px;
   height: auto;
@@ -44,6 +53,7 @@
 .comment-section {
   display: flex;
   flex-direction: column;
+  max-width: 450px;
 }
 
 .comment-section > textarea {
@@ -52,6 +62,12 @@
 
 .comment-section > button {
   margin-bottom: 1rem;
+}
+
+a.btn {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
 }
 
 /* Large devices (laptops, desktops and up) */
