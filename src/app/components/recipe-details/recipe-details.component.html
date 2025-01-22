@@ -11,22 +11,25 @@
     <p>by {{ recipe.credits | checkForAuthor | joinAuthors }}</p>
     <p>Published {{ recipe.created_at | dateFormatter }}</p>
 
-    <div class="image-container">
-      <img src="{{ recipe.thumbnail_url }}" alt="{{ recipe.name }}" />
+    <div class="image-ingredients-container">
+      <div class="image-container">
+        <img src="{{ recipe.thumbnail_url }}" alt="{{ recipe.name }}" />
+      </div>
+      <ul class="ingredients">
+        <h3>Ingredients for {{ recipe.num_servings }} servings:</h3>
+        @for(ingredient of ingredients; track ingredient.id; ) {
+        <li>
+          <p>
+            {{ ingredient.quantity | hideZeroQuantity }} {{ ingredient.unit }}
+            {{ ingredient.name }}
+            {{ ingredient.extra_comment }}
+          </p>
+        </li>
+        }
+      </ul>
     </div>
     <p class="description">{{ recipe.description }}</p>
-    <h3>Ingredients for {{ recipe.num_servings }} servings:</h3>
-    <ul class="ingredients">
-      @for(ingredient of ingredients; track ingredient.id; ) {
-      <li>
-        <p>
-          {{ ingredient.quantity | hideZeroQuantity }} {{ ingredient.unit }}
-          {{ ingredient.name }}
-          {{ ingredient.extra_comment }}
-        </p>
-      </li>
-      }
-    </ul>
+
     <h3>Instructions:</h3>
     <ol class="instructions">
       @for(instruction of instructions; track instruction.id){
