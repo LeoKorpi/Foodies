@@ -61,7 +61,7 @@
     </div>
     <button
       type="button"
-      class="add-btn"
+      class="btn add-btn"
       (click)="createPostService.addIngredients()"
     >
       Add ingredients
@@ -80,11 +80,14 @@
     </div>
     <button
       type="button"
-      class="add-btn"
+      class="btn add-btn"
       (click)="createPostService.addInstructions()"
     >
       Add instructions
     </button>
-    <button type="submit" [disabled]="!postForm.valid">Publish post</button>
+    <br />
+    <button class="btn" type="submit" [disabled]="!postForm.valid">
+      Publish post
+    </button>
   </form>
 </section>
