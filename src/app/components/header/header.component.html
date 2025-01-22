@@ -1,5 +1,11 @@
 <header>
-  <h1 routerLink="/">Foodies</h1>
+  <div class="heading-and-toggleview">
+    <h1 routerLink="/">Foodies</h1>
+    <button (click)="toggleView()">
+      <app-icon-change-circle></app-icon-change-circle>
+      @if(loginVisible()){Logged in as: }{{ viewState() }}
+    </button>
+  </div>
   <div class="navbar">
     <nav>
       <ul>
@@ -16,9 +22,5 @@
         }
       </ul>
     </nav>
-    <button (click)="toggleView()">
-      <app-icon-change-circle></app-icon-change-circle>
-      @if(loginVisible()){Logged in as: }{{ viewState() }}
-    </button>
   </div>
 </header>
