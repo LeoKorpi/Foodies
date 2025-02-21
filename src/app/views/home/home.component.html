@@ -4,7 +4,7 @@
     @for(recipe of recipes; track recipe.id){
     <app-recipe-item class="grid-item" [recipe]="recipe" />
     } @empty {
-    <p>No recipes yet...</p>
+    <p>No recipes yet, fetching...</p>
     }
   </div>
 </main>
