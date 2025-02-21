@@ -1,4 +1,14 @@
-# BlogProject
+# Foodies
+
+Foodies was a course-project where we had to make a blog using Angular.
+
+All of the recipe data is fetched from a RESTful API which is then parsed and formatted using various services and pipes. Users can also log in to create their own posts and react to existing recipes which is saved using localstorage.
+
+This project taught me more about integrating APIs into web-projects and Angular's approach to the single responsibility principle. The learning curve was steep in the beginning with both learning Angular's main concepts and TypeScript, but after a while things went really smooth. Wish I had spent more time on styling, but the main focus was elsewhere for this project. Until next time!
+
+Everything below is generated from generating a new angular project using Angulars CLI.
+
+# Info
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.4.
 
